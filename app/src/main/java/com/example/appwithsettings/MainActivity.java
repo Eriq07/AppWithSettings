@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean switchPref = sharedPref.getBoolean(SettingsActivity.KEY_PREF_EXAMPLE_SWITCH, false);
         Toast.makeText(this, switchPref.toString(), Toast.LENGTH_SHORT).show();
+
+
+
     }
 
     @Override
@@ -53,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+       /* int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -62,6 +67,39 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);*/
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                // Add a toast just for confirmation
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+
+                return true;
+            case R.id.bottom_nav:
+
+                Intent bottomIntent = new Intent(this, BottomActivity.class);
+                startActivity(bottomIntent);
+
+                return true;
+
+            case R.id.tab_nav:
+
+                Intent tabIntent = new Intent(this, TabActivity.class);
+                startActivity(tabIntent);
+
+                return true;
+
+            case R.id.drawer_nav:
+
+                Intent drawerIntent = new Intent(this, DrawerActivity.class);
+                startActivity(drawerIntent);
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
+
+
 }
